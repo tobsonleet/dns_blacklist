@@ -1,6 +1,101 @@
 ||20000.mt.eu.iot.mova-tech.com^
 ||optimizationguide-pa.googleapis.com
-yuki.bt.bontal.net
-||bontal.net
-tracker.kmzs123.cn
-||kmzs123.cn
+
+! ============================================================
+! STUFE 1 – reine Telemetrie, keine Funktion bricht
+! ============================================================
+!
+! --- UniFi (Gateway 192.168.20.1) ---
+! UniFi Geräte-Fingerprinting (ML), sendet Client-Infos alle paar Sekunden an AWS USA
+||fprint-ml-poc.dev.svc.ui.com^
+!
+! --- Crash-Reporting (Gateway + Handy-Apps) ---
+! Sentry Absturzberichte (EU/Global-Ingest)
+||ingest.sentry.io^
+! Sentry Absturzberichte (US-Ingest, u.a. vom UniFi-Gateway)
+||ingest.us.sentry.io^
+!
+! --- Mova V50 Saugroboter (192.168.30.101) ---
+! Baidu Upload-/Statistik-Endpunkt, ca. wöchentlich
+||upl.baidu.com^
+! Entwickler-Überbleibsel in der Firmware, löst auf private IP 10.124.10.35 auf
+||git.kutting.tech^
+!
+! --- Navimow Mähroboter (192.168.30.243) ---
+! Nächtlicher Log-Upload (Azure)
+||logsec-sg.willand.com^
+!
+! --- SMLIGHT SLZB-06 Zigbee-Koordinator (192.168.30.102) ---
+! Nutzungsstatistik des Herstellers (Firmware-Updates via updates.smlight.tech bleiben erlaubt)
+||stats.smlight.tech^
+!
+! --- Navidrome (192.168.20.116) ---
+! Anonyme Nutzungsstatistik; zusätzlich ND_ENABLEINSIGHTSCOLLECTOR=false setzen
+||insights.navidrome.org^
+!
+! --- Synology NAS (192.168.20.12) ---
+! DSM Geräteanalyse/Telemetrie-Collector; zusätzlich in DSM deaktivieren
+||collectorupdate7.synology.com^
+! DSM Geräteanalyse/Telemetrie-Collector (Auto-Variante)
+||collectorautoupdate7.synology.com^
+!
+! --- Proxmox Helper Scripts (LXC 104 u.a.) ---
+! Installations-Diagnose der community-scripts; zusätzlich DIAGNOSTICS=no setzen
+||telemetry.community-scripts.org^
+!
+! --- Claude Code (LXC 113) ---
+! Datadog Log-Intake (Telemetrie); zusätzlich CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+||logs.us5.datadoghq.com^
+!
+! --- Philips/Google TV (192.168.10.10) ---
+! TP Vision (Philips TV) Nutzungs-Analytics
+||tpv-analytics.com^
+! Werbe-Auslieferung auf dem TV
+||adportal.ch^
+!
+! --- Laptop (192.168.10.30) ---
+! Amazon Client-Side-Metrics / Tracking (DE)
+||unagi.amazon.de^
+! Amazon Client-Side-Metrics / Tracking (EU)
+||unagi-eu.amazon.com^
+! Amazon Client-Side-Metrics / Tracking (NA)
+||unagi-na.amazon.com^
+! Windows Telemetrie-Konfiguration
+||settings-win.data.microsoft.com^
+! Network Error Logging (Browser meldet Ladefehler an Dritte)
+||nelreports.net^
+! In-App-Story-Tracking (Storyly)
+||metric.storyly.io^
+! Swisscom Server-Side-Tracking
+||serversidetracking.prod.mdl.swisscom.ch^
+! Mozilla Analytics via CDN
+||mozilla-analytics.b-cdn.net^
+! Firefox-Canary: signalisiert Firefox, DoH abzuschalten und AdGuard zu nutzen
+||use-application-dns.net^
+!
+! --- Epson Drucker (192.168.10.138) ---
+! Tägliche Statusmeldung an Epson
+||irs.epson.biz^
+!
+! ============================================================
+! STUFE 2 – blockbar, aber Funktion fällt weg (erst testen)
+! Zum Aktivieren das führende "! " vor der Regel entfernen.
+! ============================================================
+!
+! Mova: nächtlicher Karten-/Log-Upload; danach prüfen, ob Karte in HA aktuell bleibt
+! ||pmaplog.mova-tech.com^
+!
+! Tapo/TP-Link IoT-Gateway & Tapo Care
+! ||tplinknbu.com^
+!
+! HomeWizard P1 Cloud; HA liest lokal weiter, nur App-Verlauf fällt weg
+! ||p1dongle.cloud.homewizard.com^
+!
+! Philips NetTV Portal; App-Galerie am TV funktioniert evtl. nicht mehr
+! ||nettvservices.com^
+!!
+! MSN/Edge Widgets & Neuer-Tab-Seite (Laptop)
+! ||msn.com^
+!
+! Epson Firmware-Update-Check
+! ||epsonpfu.ebz.epson.net^
